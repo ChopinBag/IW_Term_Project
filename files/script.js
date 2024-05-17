@@ -1,5 +1,5 @@
 const version = '11.10.1'; // 최신 버전으로 변경 가능
-const apiKey = 'RGAPI-b086b657-e245-4673-920a-37686aff31b5'; // API 키를 입력하세요
+const apiKey = 'RGAPI-b086b657-e245-4673-920a-37686aff31b5'; // 제공된 API 키
 
 const championsUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`;
 const itemsUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/item.json`;
@@ -34,19 +34,37 @@ async function populateChampions() {
 async function populateItems() {
     const data = await fetchData(itemsUrl);
     const items = data.data;
-    const attackerItemsSelect = document.getElementById('attacker-items');
-    const defenderItemsSelect = document.getElementById('defender-items');
+    const attackerItemsDiv = document.getElementById('attacker-items');
+    const defenderItemsDiv = document.getElementById('defender-items');
 
-    for (const key in items) {
-        const option = document.createElement('option');
-        option.value = key;
-        option.textContent = items[key].name;
-        attackerItemsSelect.appendChild(option);
+    for (let i = 0; i < 6; i++) {
+        const attackerSelect = document.createElement('select');
+        attackerSelect.name = `attacker-item-${i}`;
+        attackerSelect.id = `attacker-item-${i}`;
+        const defenderSelect = document.createElement('select');
+        defenderSelect.name = `defender-item-${i}`;
+        defenderSelect.id = `defender-item-${i}`;
 
-        const option2 = document.createElement('option');
-        option2.value = key;
-        option2.textContent = items[key].name;
-        defenderItemsSelect.appendChild(option2);
+        const emptyOption = document.createElement('option');
+        emptyOption.value = '';
+        emptyOption.textContent = 'None';
+        attackerSelect.appendChild(emptyOption);
+        defenderSelect.appendChild(emptyOption);
+
+        for (const key in items) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = items[key].name;
+            attackerSelect.appendChild(option);
+
+            const option2 = document.createElement('option');
+            option2.value = key;
+            option2.textContent = items[key].name;
+            defenderSelect.appendChild(option2);
+        }
+
+        attackerItemsDiv.appendChild(attackerSelect);
+        defenderItemsDiv.appendChild(defenderSelect);
     }
 }
 
@@ -75,7 +93,7 @@ async function populateSkills() {
 function calculateDamage(attacker, defender, skill, attackerItems, defenderItems, attackerLevel, defenderLevel) {
     let attackDamage = attacker.stats.attackdamage + (attacker.stats.attackdamageperlevel * (attackerLevel - 1));
     let armor = defender.stats.armor + (defender.stats.armorperlevel * (defenderLevel - 1));
-    let skillDamage = skill.damage[0]; // 예시로 첫 번째 레벨의 스킬 데미지 사용
+    let skillDamage = skill.effectFlat[0] || skill.effect[0]; // 예시로 첫 번째 레벨의 스킬 데미지 사용
 
     attackerItems.forEach(item => {
         if (item.stats.attackdamage) {
@@ -105,8 +123,15 @@ document.getElementById('damage-form').addEventListener('submit', async function
     const defenderLevel = parseInt(document.getElementById('defender-level').value) || 1;
     const skillIndex = document.getElementById('attacker-skill').value;
 
-    const attackerItemsKeys = Array.from(document.querySelectorAll('#attacker-items option:checked')).map(item => item.value);
-    const defenderItemsKeys = Array.from(document.querySelectorAll('#defender-items option:checked')).map(item => item.value);
+    const attackerItemsKeys = [];
+    const defenderItemsKeys = [];
+
+    for (let i = 0; i < 6; i++) {
+        const attackerItemKey = document.getElementById(`attacker-item-${i}`).value;
+        const defenderItemKey = document.getElementById(`defender-item-${i}`).value;
+        if (attackerItemKey) attackerItemsKeys.push(attackerItemKey);
+        if (defenderItemKey) defenderItemsKeys.push(defenderItemKey);
+    }
 
     const championsData = await fetchData(championsUrl);
     const itemsData = await fetchData(itemsUrl);
