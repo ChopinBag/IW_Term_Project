@@ -1,16 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>Test Files</title>
-    <link rel="js" href="skillList.js">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOL 챔피언 스킬 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #champion-select {
+            margin-bottom: 10px;
+        }
+        #skills-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skill-item {
+            margin: 10px 0;
+        }
+        .skill-details {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Test Files</h1>
-    <p>These are the test files for the project.</p>
-    <ul>
-        <li><a href="skillList.html">Skill List</a></li>
-        <li><a href="skillList.js">Skill List JS</a></li>
-        <li><a href="skillList.css">Skill List CSS</a></li>
-    </ul>
+    <h1>LOL 챔피언 스킬 목록</h1>
+    <select id="champion-select">
+        <option value="">챔피언을 선택하세요</option>
+    </select>
+    <button onclick="loadChampionSkills()">스킬 가져오기</button>
+    <ul id="skills-list"></ul>
+
+    <script>
+        async function fetchChampionList(version, language) {
+            const url = `https://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.data; // 챔피언 목록 반환
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        }
+
+        async function fetchSpecificChampionData(version, language, championName) {
+            const url = `https://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion/${championName}.json`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.data[championName]; // 특정 챔피언 데이터 반환
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        }
+
+        async function fetchChampionSkills(version, language, championName) {
+            const championData = await fetchSpecificChampionData(version, language, championName);
+            if (!championData) {
+                console.error(`No data found for champion: ${championName}`);
+                return;
+            }
+            
+            const { passive, spells } = championData;
+            const skillList = [
+                {
+                    name: passive.name,
+                    description: passive.description,
+                    detailedDescription: passive.sanitizedDescription,
+                    type: '패시브'
+                },
+                ...spells.map(spell => ({
+                    name: spell.name,
+                    description: spell.description,
+                    detailedDescription: spell.tooltip,
+                    type: '스킬'
+                }))
+            ];
+
+            return skillList;
+        }
+
+        function loadChampionSkills() {
+            const selectElement = document.getElementById('champion-select');
+            const championName = selectElement.value;
+            if (!championName) {
+                alert('챔피언을 선택하세요.');
+                return;
+            }
+
+            fetchChampionSkills('14.10.1', 'ko_KR', championName).then(skills => {
+                if (skills) {
+                    const skillsListElement = document.getElementById('skills-list');
+                    skillsListElement.innerHTML = ''; // 기존 목록 초기화
+
+                    skills.forEach(skill => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'skill-item';
+                        listItem.innerHTML = `<strong>${skill.type}: ${skill.name}</strong>: ${skill.description}`;
+
+                        const skillDetails = document.createElement('div');
+                        skillDetails.className = 'skill-details';
+                        skillDetails.innerText = skill.detailedDescription;
+
+                        listItem.appendChild(skillDetails);
+                        skillsListElement.appendChild(listItem);
+                    });
+                }
+            });
+        }
+
+        // 챔피언 목록을 가져와서 드롭다운 메뉴에 추가
+        async function populateChampionSelect() {
+            const championList = await fetchChampionList('14.10.1', 'ko_KR');
+            const selectElement = document.getElementById('champion-select');
+
+            for (const champion in championList) {
+                const option = document.createElement('option');
+                option.value = champion;
+                option.text = championList[champion].name;
+                selectElement.appendChild(option);
+            }
+        }
+
+        // 페이지 로드 시 챔피언 목록 채우기
+        window.onload = populateChampionSelect;
+    </script>
 </body>
 </html>
