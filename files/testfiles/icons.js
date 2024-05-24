@@ -27,13 +27,13 @@ async function fetchSpecificChampData(champName) {
 }
 
 async function fetchChampSkills(champName) {
-    const championData = await fetchSpecificChampionData(champName);
-    if (!championData) {
+    const champData = await fetchSpecificChampData(champName);
+    if (!champData) {
         console.error(`No data found for champ: ${champName}`);
         return;
     }
     
-    const { passive, spells } = championData;
+    const { passive, spells } = champData;
     const skillList = [
         {
             name: passive.name,
@@ -52,7 +52,7 @@ async function fetchChampSkills(champName) {
     return skillList;
 }
 
-function loadChampionSkills() {
+function loadChampSkills() {
     const selectElement = document.getElementById('champ-select');
     const champName = selectElement.value;
     if (!champName) {
@@ -60,7 +60,7 @@ function loadChampionSkills() {
         return;
     }
 
-    fetchChampionSkills(champName).then(skills => {
+    fetchChampSkills(champName).then(skills => {
         if (skills) {
             const skillsListElement = document.getElementById('skills-list');
             skillsListElement.innerHTML = ''; // 기존 목록 초기화

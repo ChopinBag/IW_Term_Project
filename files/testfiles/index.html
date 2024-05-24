@@ -25,6 +25,12 @@
             margin-top: 5px;
             border-radius: 5px;
         }
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -78,13 +84,14 @@
                 {
                     name: passive.name,
                     description: passive.description,
-                    detailedDescription: passive.sanitizedDescription,
+                    icon: `https://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${passive.image.full}`,
                     type: '패시브'
                 },
                 ...spells.map(spell => ({
                     name: spell.name,
                     description: spell.description,
                     detailedDescription: spell.tooltip,
+                    icon: `https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell.image.full}`,
                     type: '스킬'
                 }))
             ];
@@ -100,7 +107,7 @@
                 return;
             }
 
-            fetchChampionSkills('14.10.1', 'ko_KR', championName).then(skills => {
+            fetchChampionSkills('12.6.1', 'ko_KR', championName).then(skills => {
                 if (skills) {
                     const skillsListElement = document.getElementById('skills-list');
                     skillsListElement.innerHTML = ''; // 기존 목록 초기화
@@ -108,13 +115,18 @@
                     skills.forEach(skill => {
                         const listItem = document.createElement('li');
                         listItem.className = 'skill-item';
-                        listItem.innerHTML = `<strong>${skill.type}: ${skill.name}</strong>: ${skill.description}`;
+                        listItem.innerHTML = `
+                            <img src="${skill.icon}" class="skill-icon" alt="${skill.name} 아이콘">
+                            <strong>${skill.type}: ${skill.name}</strong>: ${skill.description}
+                        `;
 
-                        const skillDetails = document.createElement('div');
-                        skillDetails.className = 'skill-details';
-                        skillDetails.innerText = skill.detailedDescription;
+                        if (skill.type === '스킬') {
+                            const skillDetails = document.createElement('div');
+                            skillDetails.className = 'skill-details';
+                            skillDetails.innerText = skill.detailedDescription;
+                            listItem.appendChild(skillDetails);
+                        }
 
-                        listItem.appendChild(skillDetails);
                         skillsListElement.appendChild(listItem);
                     });
                 }
@@ -123,7 +135,7 @@
 
         // 챔피언 목록을 가져와서 드롭다운 메뉴에 추가
         async function populateChampionSelect() {
-            const championList = await fetchChampionList('14.10.1', 'ko_KR');
+            const championList = await fetchChampionList('12.6.1', 'ko_KR');
             const selectElement = document.getElementById('champion-select');
 
             for (const champion in championList) {
