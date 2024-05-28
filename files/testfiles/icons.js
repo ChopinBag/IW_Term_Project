@@ -27,13 +27,13 @@ async function fetchSpecificChampData(champName) {
 }
 
 async function fetchChampSkills(champName) {
-    const championData = await fetchSpecificChampionData(champName);
-    if (!championData) {
+    const champData = await fetchSpecificChampData(champName);
+    if (!champData) {
         console.error(`No data found for champ: ${champName}`);
         return;
     }
     
-    const { passive, spells } = championData;
+    const { passive, spells } = champData;
     const skillList = [
         {
             name: passive.name,

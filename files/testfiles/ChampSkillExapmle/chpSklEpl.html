@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOL 챔피언 스킬 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #champion-select {
+            margin-bottom: 10px;
+        }
+        #skills-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skill-item {
+            margin: 10px 0;
+        }
+        .skill-details {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>LOL 챔피언 스킬 목록</h1>
+    <select id="champion-select">
+        <option value="">챔피언을 선택하세요</option>
+    </select>
+    <button onclick="loadChampionSkills()">스킬 가져오기</button>
+    <ul id="skills-list"></ul>
+
+    <script src="champSkillList.js"></script>
+</body>
+</html>
