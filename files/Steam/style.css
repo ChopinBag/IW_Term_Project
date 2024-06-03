@@ -1,0 +1,52 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* header 스타일 */
+header {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+/* main 스타일 */
+main {
+    padding: 2em;
+}
+
+/* 게임 목록 스타일 */
+#game-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#game-list li {
+    background-color: #ecf0f1;
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+#game-list li:hover {
+    transform: scale(1.05);
+}
+
+/* 모바일 대응 */
+@media (max-width: 900px) {
+    main {
+        padding: 1em;
+    }
+}
+
+@media (max-width: 600px) {
+    #game-list li {
+        padding: 0.5em;
+    }
+}
