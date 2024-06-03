@@ -1,50 +1,42 @@
-document.getElementById('fetch-games').addEventListener('click', fetchDiscountedGames);
+document.addEventListener("DOMContentLoaded", () => {
+    const apiKey = '08F20F3E10EB5008CF69F3897DB89FD2';
+    const steamStoreUrl = 'https://store.steampowered.com/api/featuredcategories/';
+    const proxyUrl = 'https://thingproxy.freeboard.io/fetch/';
 
-async function fetchDiscountedGames() {
-    const gamesContainer = document.getElementById('games-container');
-    gamesContainer.innerHTML = 'Loading...';
-
-    // Step 1: Get the list of all games
-    const gamesListResponse = await fetch('https://api.steampowered.com/ISteamApps/GetAppList/v2/');
-    const gamesListData = await gamesListResponse.json();
-    const appList = gamesListData.applist.apps.slice(0, 100); // Limiting to first 100 games for demonstration
-
-    // Step 2: Function to get details of a game
-    async function getGameDetails(appId) {
-        const gameDetailsResponse = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appId}`);
-        const gameDetailsData = await gameDetailsResponse.json();
-        return gameDetailsData[appId];
-    }
-
-    // Step 3: Fetch details for each game and filter discounted games
-    const gamesOnSale = [];
-    for (const game of appList) {
-        const details = await getGameDetails(game.appid);
-        if (details.success && details.data.price_overview && details.data.price_overview.discount_percent > 0) {
-            gamesOnSale.push({
-                name: details.data.name,
-                original_price: details.data.price_overview.initial_formatted,
-                discounted_price: details.data.price_overview.final_formatted,
-                discount_percent: details.data.price_overview.discount_percent
-            });
+    async function getDiscountedGames() {
+        try {
+            const response = await fetch(proxyUrl + steamStoreUrl);
+            if (response.ok) {
+                const data = await response.json();
+                if (data && data.specials && data.specials.items) {
+                    displayGames(data.specials.items);
+                }
+            } else {
+                console.error('Failed to fetch data from Steam API');
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
     }
 
-    // Step 4: Display the games on sale
-    gamesContainer.innerHTML = '';
-    if (gamesOnSale.length > 0) {
-        gamesOnSale.forEach(game => {
+    function displayGames(games) {
+        const gamesList = document.getElementById('games-list');
+        gamesList.innerHTML = '';
+
+        games.forEach(game => {
             const gameElement = document.createElement('div');
             gameElement.className = 'game';
+
             gameElement.innerHTML = `
-                <h3>${game.name}</h3>
-                <p>Original Price: ${game.original_price}</p>
-                <p>Discounted Price: ${game.discounted_price}</p>
-                <p>Discount: ${game.discount_percent}%</p>
+                <h2>${game.name}</h2>
+                <p>Original Price: $${(game.original_price / 100).toFixed(2)}</p>
+                <p>Discounted Price: $${(game.final_price / 100).toFixed(2)}</p>
+                <p>Discount Percentage: ${game.discount_percent}%</p>
             `;
-            gamesContainer.appendChild(gameElement);
+
+            gamesList.appendChild(gameElement);
         });
-    } else {
-        gamesContainer.innerHTML = 'No discounted games found.';
     }
-}
+
+    getDiscountedGames();
+});
