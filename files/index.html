@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Damage Calculator</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <h1>Damage Calculator</h1>
+        <div id="app">
+            <form id="damage-form">
+                <label for="attacker">Attacker:</label>
+                <select name="attacker" id="attacker" onchange="populateSkills()"></select>
+
+                <label for="attacker-level">Attacker Level:</label>
+                <input type="number" id="attacker-level" name="attacker-level" min="1" max="18">
+
+                <label for="defender">Defender:</label>
+                <select name="defender" id="defender"></select>
+
+                <label for="defender-level">Defender Level:</label>
+                <input type="number" id="defender-level" name="defender-level" min="1" max="18">
+
+                <label for="attacker-skill">Attacker Skill:</label>
+                <select name="attacker-skill" id="attacker-skill"></select>
+
+                <label for="attacker-items">Attacker Items:</label>
+                <div id="attacker-items"></div>
+
+                <label for="defender-items">Defender Items:</label>
+                <div id="defender-items"></div>
+
+                <button type="submit">Calculate Damage</button>
+            </form>
+            <div id="result"></div>
+        </div>
+    </body>
+</html>
