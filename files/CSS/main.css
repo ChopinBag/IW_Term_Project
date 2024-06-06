@@ -1,0 +1,6 @@
+iframe {
+    width: 50%;
+    height: 1080px;
+    border: none;
+    overflow: hidden; /* iframe 자체의 스크롤바를 숨깁니다 */
+}

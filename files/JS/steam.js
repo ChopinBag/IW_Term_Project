@@ -1,6 +1,16 @@
 const backendUrl = 'http://localhost:3000/api/featured';
 const searchUrl = 'http://localhost:3000/api/search?query=';
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("game_name").addEventListener("keyup", function(e) {
+        if (e.key === "Enter") {
+            searchGame();
+        }
+    });
+
+    getDiscountedGames();
+});
+
 async function getDiscountedGames() {
     try {
         const response = await fetch(backendUrl);
@@ -48,9 +58,6 @@ async function getDiscountedGames() {
             gameDiv.appendChild(discountPercent);
 
             discountedGamesDiv.appendChild(gameDiv);
-            discountedGamesDiv.appendChild(document.createElement('br'));
-            discountedGamesDiv.appendChild(document.createElement('hr'));
-            discountedGamesDiv.appendChild(document.createElement('br'));
         });
 
     } catch (error) {
@@ -111,8 +118,8 @@ async function searchGame() {
             gameDiv.appendChild(gameImage);
             gameDiv.appendChild(gameName);
             gameDiv.appendChild(originalPrice);
-            if (finalPrice) gameDiv.appendChild(finalPrice);
-            if (discountPercent) gameDiv.appendChild(discountPercent);
+            if (finalPrice.textContent) gameDiv.appendChild(finalPrice);
+            if (discountPercent.textContent) gameDiv.appendChild(discountPercent);
             gameDiv.appendChild(storeLink);
 
             searchResultDiv.appendChild(gameDiv);
@@ -127,6 +134,3 @@ async function searchGame() {
         searchResultDiv.textContent = 'Error fetching game data';
     }
 }
-
-// 함수 호출
-getDiscountedGames();

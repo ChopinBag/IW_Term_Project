@@ -6,6 +6,9 @@ const port = 3000;
 
 const steamStoreUrl = 'https://store.steampowered.com/api/featured';
 const steamSearchUrl = 'https://store.steampowered.com/api/storesearch/?term=';
+const naverNewsUrl = 'https://openapi.naver.com/v1/search/news.json';
+const clientId = 'dloPTebOu4cLrqZwu8eQ';
+const clientSecret = 'XW9a6SWIgJ';
 
 // CORS 미들웨어 사용
 app.use(cors());
@@ -45,6 +48,25 @@ app.get('/api/search', async (req, res) => {
         }
     } catch (error) {
         res.status(500).send('Error searching for game on Steam API');
+    }
+});
+
+app.get('/api/news', async (req, res) => {
+    try {
+        const response = await axios.get(naverNewsUrl, {
+            params: {
+                query: 'e스포츠',
+                display: 10,
+                sort: 'date'
+            },
+            headers: {
+                'X-Naver-Client-Id': clientId,
+                'X-Naver-Client-Secret': clientSecret
+            }
+        });
+        res.json(response.data.items);
+    } catch (error) {
+        res.status(500).send('Error fetching data from Naver News API');
     }
 });
 

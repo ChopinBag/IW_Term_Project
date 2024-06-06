@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steam Page</title>
+    <link rel="stylesheet" type="text/css" href="CSS/steam.css">
+    <script src="JS/steam.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div id="search_game" class="column">
+                <h2><img src="image/steamlogo.png" alt="Steam Logo" width="30px" height="30px"> Search Game</h2>
+                <input type="text" id="game_name" placeholder="Enter game name">
+                <button id="submit" onclick="searchGame()">Search</button>
+                <div id="search_result"></div>
+            </div>
+            <hr>
+            <div class="column" id="Discounted_Games">
+                <h2><img src="image/steamlogo.png" alt="Steam Logo" width="30px" height="30px"> Discounted Games</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
