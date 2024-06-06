@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game News</title>
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
+    <script src="JS/steam.js" defer></script>
+    <script src="JS/main.js" defer></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Game News</h1>
+    </div>
+    <hr>
+    <div class="nav">
+        <h2>Contents</h2>
+        <a href="#search_game">Search Game</a>
+        <a href="#Discounted_Games">Discounted Games</a>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        
+        <div id="search_game" class="column">
+            <h2><img src="image/steamlogo.png" alt="Steam Logo" width="30px" height="30px"> Search Game</h2>
+            <input type="text" id="game_name" placeholder="Enter game name">
+            <button onclick="searchGame()">Search</button>
+            <div id="search_result"></div>
+        </div>
+        <hr>
+        <div class="column" id="Discounted_Games">
+            <h2><img src="image/steamlogo.png" alt="Steam Logo" width="30px" height="30px"> Discounted Games</h2>
+        </div>
+    </div>
+    <div class="footer">
+        <h2>Game News</h2>
+    </div>
+</body>
+</html>
