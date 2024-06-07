@@ -4,3 +4,8 @@ iframe {
     border: none;
     overflow: hidden; /* iframe 자체의 스크롤바를 숨깁니다 */
 }
+
+footer {
+    color: grey;
+    text-align: center;
+}

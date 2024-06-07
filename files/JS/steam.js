@@ -1,6 +1,3 @@
-const backendUrl = 'http://localhost:3000/api/featured';
-const searchUrl = 'http://localhost:3000/api/search?query=';
-
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("game_name").addEventListener("keyup", function(e) {
         if (e.key === "Enter") {
@@ -10,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     getDiscountedGames();
 });
+
+const backendUrl = 'http://localhost:3000/api/featured';
+const searchUrl = 'http://localhost:3000/api/search?query=';
 
 async function getDiscountedGames() {
     try {
@@ -24,13 +24,10 @@ async function getDiscountedGames() {
             originalPrice: game.original_price,
             finalPrice: game.final_price,
             discountPercent: game.discount_percent,
-            imageUrl: game.header_image // 이미지 URL 추가
+            imageUrl: game.header_image
         }));
 
-        // HTML 요소 생성
         const discountedGamesDiv = document.getElementById('Discounted_Games');
-        // discountedGamesDiv.innerHTML = ''; // 기존 내용 제거
-
         discountedGames.forEach(game => {
             const gameDiv = document.createElement('div');
             gameDiv.classList.add('game');
