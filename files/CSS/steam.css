@@ -89,3 +89,24 @@ td > img {
 td > img[src*="image"] {
     margin-right: 10px;
 }
+
+@media (max-width: 900px) { /* 모바일 환경 (900px 이하)스타일 */
+    .column {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 60px;
+        height: auto;
+    }
+    
+    td img {
+        width: 200px;
+        height: auto;
+    }
+}

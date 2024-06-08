@@ -14,3 +14,20 @@ html, body {
     overflow-y: scroll;
 }
 
+.news-item h2 {
+    font-size: 1.2rem;
+}
+
+.news-item p {
+    font-size: 1rem;
+}
+
+@media (max-width: 900px) { /* 모바일 환경 (900px 이하)스타일 */
+    .news-item h2 {
+        font-size: 1rem;
+    }
+
+    .news-item p {
+        font-size: 0.9rem;
+    }
+}
