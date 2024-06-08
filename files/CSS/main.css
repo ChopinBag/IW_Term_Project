@@ -1,11 +1,95 @@
-iframe {
-    width: 50%;
-    height: 1080px;
-    border: none;
-    overflow: hidden; /* iframe 자체의 스크롤바를 숨깁니다 */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #ffffff, #ede8fa);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.header {
+    background: linear-gradient(to bottom, #180e27, #1d1338);
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 1px 2px 5px black;
+}
+
+.header > h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.steam > h2, .news > h2 {
+    text-align: center;
+}
+
+nav {
+    background: linear-gradient(to bottom, #1d1057, #1d1338);
+    color: aliceblue;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+nav > a {
+    color: #fff;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav > a:hover {
+    color: rgb(46, 158, 255);
 }
 
 footer {
-    color: grey;
+    background: linear-gradient(to bottom, #180e27, #1d1338);
+    color: #fff;
     text-align: center;
+    padding: 1rem 0;
+    bottom: 0;
+    width: 100%;
+}
+
+iframe {
+    width: 800px; /* 고정된 너비 설정 */
+    height: 600px;
+    overflow: hidden;
+    border: none; /* iframe 테두리 제거 */
+}
+
+#mainContent {
+    text-align: center;
+    display: flex;
+    justify-content: center; /* 중심으로 정렬 */
+    align-items: flex-start; /* 세로 정렬 */
+    gap: 100px; /* iframe 사이에 간격 추가 */
+    padding: 20px; /* 콘텐츠 주변에 여백 추가 */
+    box-sizing: border-box; /* 패딩을 포함한 박스 크기 계산 */
+}
+
+#newsArticle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px; /* 추가적인 패딩을 원한다면 */
+    box-sizing: border-box;
+    margin-top: 20px; /* 필요에 따라 간격 추가 */
+}
+
+#newArticle {
+    text-align: center;
+}
+
+.news-iframe {
+    width: 80%;
+    height: 2000px; /* 높이를 2000px로 설정 */
+}
+
+#up {
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    width: 30px;
 }

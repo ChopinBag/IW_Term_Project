@@ -1,8 +1,8 @@
 html, body {
+    background-color: aliceblue;
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* 기본 스크롤바 숨기기 */
 }
 
 .container {
@@ -11,18 +11,81 @@ html, body {
     justify-content: flex-start; /* 컨테이너를 상단에 정렬 */
     align-items: center;
     height: 100%;
-    overflow-y: scroll; /* 내부 스크롤은 가능하게 */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-}
-
-.container::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
 }
 
 .column {
-    width: 80%; /* 적절한 너비 설정 */
-    max-width: 800px; /* 최대 너비 설정 */
+    width: 100%; /* 적절한 너비 설정 */
     margin: 20px 0; /* 상하 여백 설정 */
     text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+
+/* 테이블 스타일 추가 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+nav {
+    background: skyblue;
+    color: black;
+    padding: 0.5rem;
+    text-align: center;
+}
+nav a {
+    color: rgb(63, 63, 63);
+    margin: 0 1rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav a:hover {
+    color: rgb(93, 103, 255);
+    text-decoration-line: none;
+}
+
+
+thead {
+    background-color: #b3d9ff; /* 밝은 푸른색 배경 */
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #e6f2ff; /* 더 밝은 푸른색 배경 */
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: #ffffff; /* 흰색 배경 */
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #3399ff; /* 더 진한 푸른색 테두리 */
+}
+
+a {
+    color: #3399ff; /* 푸른색 링크 */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+td > img {
+    vertical-align: middle;
+}
+
+td > img[src*="image"] {
+    margin-right: 10px;
 }

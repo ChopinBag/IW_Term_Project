@@ -3,27 +3,38 @@
 <head>
     <title>Game News</title>
     <link rel="stylesheet" type="text/css" href="CSS/main.css">
+    <script src="JS/main.js" defer></script>
 </head>
-<body>
+<body id="top">
     <div class="header">
         <h1>Game News</h1>
     </div>
-    <hr>
-    <div class="nav">
+    <nav>
         <h2>Contents</h2>
         <a href="#steamFrame">Steam</a>
-        <a href="#lolFrame">LoL Matches</a> <!-- LoL Matches 링크 추가 -->
+        <a href="#naverFrame">news</a>
+        <a href="#newsArticle">Article</a>
+    </nav>
+
+    <div id="mainContent">
+        <div class="iframe" id="steamIf">
+            <h2>Games</h2>
+            <iframe src="steam.html" class="column" id="steamFrame"></iframe>        
+        </div>
+
+        <div class="iframe" id="newsIf">
+            <h2>Game News</h2>
+            <iframe src="naverNews.html" class="column" id="naverFrame"></iframe>
+        </div>
     </div>
-    <br>
-    <hr>
-    <iframe src="steam.html" class="column" id="steamFrame"></iframe>
-    <iframe src="lolMatches.html" class="column" id="lolFrame"></iframe> <!-- LoL Matches iframe 추가 -->
-    <div class="footer">
-        <h2>Game News</h2>
-        <iframe src="naverNews.html" class="column" id="naverFrame"></iframe>
-    </div>
+
+    <div id="newsArticle">
+        <h2>Article</h2>
+    </div> 
+
     <footer>
         <p>Copyright © 202455376 임승우. All rights reserved.</p>
     </footer>
+    <a href="#top" id="up"><img src="image/up.png"></a>
 </body>
 </html>

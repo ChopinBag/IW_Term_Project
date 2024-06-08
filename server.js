@@ -10,9 +10,6 @@ app.use(cors());
 // Static files
 app.use(express.static('files'));
 
-// API 키와 URL 설정
-const riotApiKey = 'RGAPI-365fac3c-fcba-4115-a9aa-06463fda894d'; // 새로 발급받은 라이엇 API 키를 여기에 입력하세요
-const riotApiUrl = 'https://kr.api.riotgames.com/lol/';
 
 // Steam API 엔드포인트
 app.get('/api/featured', async (req, res) => {
@@ -74,49 +71,7 @@ app.get('/api/news', async (req, res) => {
     }
 });
 
-// 소환사 정보 조회 엔드포인트
-app.get('/api/summoner/:name', async (req, res) => {
-    const summonerName = encodeURIComponent(req.params.name);
-    try {
-        console.log(`Fetching summoner data for: ${summonerName}`);
-        const response = await axios.get(`${riotApiUrl}summoner/v4/summoners/by-name/${summonerName}`, {
-            headers: {
-                'X-Riot-Token': riotApiKey
-            }
-        });
-        console.log(`Riot API response: ${JSON.stringify(response.data)}`);
-        res.json(response.data);
-    } catch (error) {
-        if (error.response) {
-            console.error('Error response from Riot API:', error.response.data);
-        } else {
-            console.error('Error:', error.message);
-        }
-        res.status(500).send('Error fetching data from Riot API');
-    }
-});
 
-// 매치 히스토리 조회 엔드포인트
-app.get('/api/matches/:accountId', async (req, res) => {
-    const accountId = req.params.accountId;
-    try {
-        console.log(`Fetching match data for account: ${accountId}`);
-        const response = await axios.get(`${riotApiUrl}match/v4/matchlists/by-account/${accountId}?endIndex=5`, {
-            headers: {
-                'X-Riot-Token': riotApiKey
-            }
-        });
-        console.log(`Riot API response: ${JSON.stringify(response.data)}`);
-        res.json(response.data.matches);
-    } catch (error) {
-        if (error.response) {
-            console.error('Error response from Riot API:', error.response.data);
-        } else {
-            console.error('Error:', error.message);
-        }
-        res.status(500).send('Error fetching data from Riot API');
-    }
-});
 
 // 서버 시작
 app.listen(port, () => {
