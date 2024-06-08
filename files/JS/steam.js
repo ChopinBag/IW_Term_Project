@@ -5,12 +5,25 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    //입력 Format 기능 : 한글 입력 방지
+    document.getElementById('game_name').addEventListener('input', function(event) {
+        const input = event.target;
+        const value = input.value;
+        // 한글 문자(가-힣)를 제거
+        const newValue = value.replace(/[\u3131-\u318E\uAC00-\uD7A3]/g, '');
+        if (value !== newValue) {
+            input.value = newValue;
+            alert('한국어 입력은 지원하지 않습니다. 영문으로 입력해주세요.');
+        }
+    });
+
     getDiscountedGames();
 });
 
 const backendUrl = 'http://localhost:3000/api/featured';
 const searchUrl = 'http://localhost:3000/api/search?query=';
 
+// 시나리오 : steam API를 활용해 할인된 게임 목록을 가져와서 화면에 표시
 async function getDiscountedGames() {
     try {
         const response = await fetch(backendUrl);
@@ -28,6 +41,10 @@ async function getDiscountedGames() {
         }));
 
         const discountedGamesDiv = document.getElementById('Discounted_Games');
+        if (!discountedGamesDiv) {
+            throw new Error('Discounted_Games element not found');
+        }
+
         discountedGames.forEach(game => {
             const gameDiv = document.createElement('div');
             gameDiv.classList.add('game');
@@ -62,8 +79,10 @@ async function getDiscountedGames() {
     }
 }
 
+// 시나리오 : steam API를 활용해 게임을 검색하고 검색 결과를 화면에 표시
 async function searchGame() {
     const gameName = document.getElementById('game_name').value;
+    
     if (!gameName) {
         alert('Please enter a game name');
         return;
@@ -79,6 +98,7 @@ async function searchGame() {
         const searchResultDiv = document.getElementById('search_result');
         searchResultDiv.innerHTML = ''; // 기존 내용 제거
 
+        //DOM HTML 요소를 생성하여 게임 정보 표시
         if (game) {
             const gameDiv = document.createElement('div');
             gameDiv.classList.add('game');
@@ -88,8 +108,8 @@ async function searchGame() {
             gameImage.src = game.header_image;
             gameImage.alt = game.name;
 
-            const gameName = document.createElement('h3');
-            gameName.textContent = game.name;
+            const gameNameElem = document.createElement('h3');
+            gameNameElem.textContent = game.name;
 
             const priceOverview = game.price_overview || {};
             const originalPrice = document.createElement('p');
@@ -113,7 +133,7 @@ async function searchGame() {
             storeLink.textContent = 'View on Steam Store';
 
             gameDiv.appendChild(gameImage);
-            gameDiv.appendChild(gameName);
+            gameDiv.appendChild(gameNameElem);
             gameDiv.appendChild(originalPrice);
             if (finalPrice.textContent) gameDiv.appendChild(finalPrice);
             if (discountPercent.textContent) gameDiv.appendChild(discountPercent);

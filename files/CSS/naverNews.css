@@ -13,20 +13,23 @@ html, body {
     height: 100%;
     overflow-y: scroll;
 }
-
+/*15번째 combinator */
 .news-item h2 {
     font-size: 1.2rem;
 }
-
+/*16번째 combinator */
 .news-item p {
     font-size: 1rem;
 }
 
-@media (max-width: 900px) { /* 모바일 환경 (900px 이하)스타일 */
+/* 모바일 환경 (900px 이하)스타일 */
+@media (max-width: 900px) { 
+    /*17번째 combinator */
     .news-item h2 {
         font-size: 1rem;
     }
-
+    
+    /*18번째 combinator */
     .news-item p {
         font-size: 0.9rem;
     }

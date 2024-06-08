@@ -8,25 +8,20 @@ html, body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* 컨테이너를 상단에 정렬 */
+    justify-content: flex-start; 
     align-items: center;
     height: 100%;
 }
 
 .column {
-    width: 100%; /* 적절한 너비 설정 */
-    margin: 20px 0; /* 상하 여백 설정 */
-    text-align: center; /* 텍스트 중앙 정렬 */
+    width: 100%; 
+    margin: 20px 0;
+    text-align: center;
 }
 
-
-/* 테이블 스타일 추가 */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 18px;
-    text-align: left;
+a {
+    color: #3399ff; 
+    text-decoration: none;
 }
 
 nav {
@@ -35,6 +30,7 @@ nav {
     padding: 0.5rem;
     text-align: center;
 }
+/* 4번째 combinator */
 nav a {
     color: rgb(63, 63, 63);
     margin: 0 1rem;
@@ -42,14 +38,35 @@ nav a {
     font-size: 1.2rem;
 }
 
-nav a:hover {
+ /* 2번째 pseudo-class */
+nav a:hover {  
     color: rgb(93, 103, 255);
     text-decoration-line: none;
 }
 
+/* 1번째 pseudo-element */
+/*5번째 combinator */
+#search_game > input::placeholder { 
+    color: #3399ff;
+}
+
+/* 2번째 pseudo-element */
+/*6번째 combinator */
+.game>h3::first-letter { 
+    color: #0062c4;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
 
 thead {
-    background-color: #b3d9ff; /* 밝은 푸른색 배경 */
+    background-color: #b3d9ff;
 }
 
 th, td {
@@ -57,40 +74,34 @@ th, td {
     border: 1px solid #dddddd;
 }
 
+/*8번째 combinator */
 tbody tr {
     border-bottom: 1px solid #dddddd;
 }
-
+/* 9번째 combinator */
 tbody tr:nth-of-type(even) {
-    background-color: #e6f2ff; /* 더 밝은 푸른색 배경 */
+    background-color: #e6f2ff;
 }
-
+/* 10번째 combinator */
 tbody tr:nth-of-type(odd) {
-    background-color: #ffffff; /* 흰색 배경 */
+    background-color: #ffffff; /
 }
-
+/* 11번째 combinator */
 tbody tr:last-of-type {
-    border-bottom: 2px solid #3399ff; /* 더 진한 푸른색 테두리 */
+    border-bottom: 2px solid #3399ff; 
 }
 
-a {
-    color: #3399ff; /* 푸른색 링크 */
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
+/*12번째 combinator */
 td > img {
     vertical-align: middle;
 }
-
+/* 13번째 combinator */
 td > img[src*="image"] {
     margin-right: 10px;
 }
 
-@media (max-width: 900px) { /* 모바일 환경 (900px 이하)스타일 */
+ /* 모바일 환경 (900px 이하)스타일 */
+@media (max-width: 900px) {
     .column {
         width: 100%;
         margin: 10px 0;
@@ -104,7 +115,7 @@ td > img[src*="image"] {
         width: 60px;
         height: auto;
     }
-    
+    /* 14번째 combinator */
     td img {
         width: 200px;
         height: auto;

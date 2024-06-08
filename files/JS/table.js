@@ -1,3 +1,4 @@
+// 각 필터링 체크박스에 대한 이벤트 리스너를 추가
 document.addEventListener('DOMContentLoaded', function() {
     const filters = {
         openWorld: document.getElementById('filterOpenWorld'),
@@ -7,14 +8,15 @@ document.addEventListener('DOMContentLoaded', function() {
         roguelike: document.getElementById('filterRoguelike')
     };
 
-    const violentFilterOn = document.getElementById('filterViolentOn');
-    const violentFilterOff = document.getElementById('filterViolentOff');
+    // violent 필터
+const violentFilterOn = document.getElementById('filterViolentOn');
+const violentFilterOff = document.getElementById('filterViolentOff');
 
-    function applyFilters() {
+function applyFilters() {
         const rows = document.querySelectorAll('tbody tr');
         let anyFilterChecked = false;
 
-        // Check if any checkbox filter is checked
+        // 체크박스 필터 중 하나라도 체크되어 있는지 확인
         for (let filter in filters) {
             if (filters[filter].checked) {
                 anyFilterChecked = true;
@@ -77,6 +79,5 @@ document.addEventListener('DOMContentLoaded', function() {
     violentFilterOn.addEventListener('change', applyFilters);
     violentFilterOff.addEventListener('change', applyFilters);
 
-    // 초기 필터 적용
     applyFilters();
 });

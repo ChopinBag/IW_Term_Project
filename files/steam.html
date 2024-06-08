@@ -14,28 +14,34 @@
     </nav>
     <div class="container">
         <div class="row">
+            <!-- 시나리오 : steam api를 활용해 게임 검색 -->
             <div id="search_game" class="column">
                 <h2><img src="image/steamlogo.png" alt="Steam Logo" width="30px" height="30px"> Search Game</h2>
+                <!--1번째 input 태그-->
                 <input type="text" id="game_name" placeholder="Enter game name">
                 <button id="submit" onclick="searchGame()">Search</button>
                 <div id="search_result"></div>
             </div>
             <hr>
             <div class="column" id="Discounted_Games">
+                <!-- 시나리오 : 할인된 게임 목록을 보여줌 -->
                 <h2><img src="image/steamlogo.png" alt="Steam Logo" width="30px" height="30px"> Discounted Games</h2>
             </div>
             <hr>
             <div class="column" id="recommended">
                 <h2>Recommended Games</h2>
+                <!-- 시나리오 : 추천 게임을 필터링해서 보여줌 -->
                 <hr>
                 <div class="filters">
                     <label>
+                        <!-- 2번째 input 태그 -->
                         <input type="radio" name="filterViolent" id="filterViolentOn" value="on"> Violent On
                     </label>
                     <label>
                         <input type="radio" name="filterViolent" id="filterViolentOff" value="off" checked> Violent Off
                     </label>
                     <hr>
+                    <!--3번째  input 태그-->
                     <label><input type="checkbox" id="filterOpenWorld"> Open World</label>
                     <label><input type="checkbox" id="filterSimulation"> Simulation</label>
                     <label><input type="checkbox" id="filterPlatform"> Platform</label>
