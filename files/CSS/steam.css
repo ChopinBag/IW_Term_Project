@@ -23,6 +23,23 @@ a {
     color: #3399ff; 
     text-decoration: none;
 }
+/* 1번째 attribute selector */
+input[type="text"] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #3399ff;
+    border-radius: 4px;
+}
+
+/* 2번째 attribute selector */
+div[class='game'] {
+    margin: 20px 0;
+    background-color: #f2f2f2;
+    padding: 10px;
+    box-shadow: 0 2px 4px #101010;
+}
 
 nav {
     background: skyblue;

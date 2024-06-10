@@ -1,5 +1,6 @@
 // iframe에 기사 여는 함수
 function openArticleInIframe(url) {
+    //DOM html element 생성
     const newsArticleContainer = document.getElementById('newsArticle');
     
     if (!newsArticleContainer) {
@@ -15,7 +16,7 @@ function openArticleInIframe(url) {
     // DOM HTML, CSS 요소를 생성하여 기사를 iframe으로 열기
     const iframe = document.createElement('iframe');
     iframe.src = url;
-    // 클래스를 추가하여 스타일 적용
+    // 클래스를 추가하여 스타일 적용, DOM객체를 이용한 css property 변경
     iframe.className = 'news-iframe'; 
     iframe.style.border = 'none';
     iframe.style.height = '1000px';

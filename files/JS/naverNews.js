@@ -1,3 +1,4 @@
+// dom html element 생성
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded event fired');
 

@@ -1,3 +1,4 @@
+//DOM html element 생성
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("game_name").addEventListener("keyup", function(e) {
         if (e.key === "Enter") {
@@ -81,6 +82,7 @@ async function getDiscountedGames() {
 
 // 시나리오 : steam API를 활용해 게임을 검색하고 검색 결과를 화면에 표시
 async function searchGame() {
+    //Dom html element 생성
     const gameName = document.getElementById('game_name').value;
     
     if (!gameName) {
@@ -104,6 +106,7 @@ async function searchGame() {
             gameDiv.classList.add('game');
             
             searchResultDiv.appendChild(document.createElement('br'));
+            //dom html element 생성
             const gameImage = document.createElement('img');
             gameImage.src = game.header_image;
             gameImage.alt = game.name;

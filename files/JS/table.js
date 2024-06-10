@@ -1,6 +1,7 @@
 // 각 필터링 체크박스에 대한 이벤트 리스너를 추가
 document.addEventListener('DOMContentLoaded', function() {
     const filters = {
+        //DOM HTML elements
         openWorld: document.getElementById('filterOpenWorld'),
         simulation: document.getElementById('filterSimulation'),
         platform: document.getElementById('filterPlatform'),
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const violentFilterOn = document.getElementById('filterViolentOn');
 const violentFilterOff = document.getElementById('filterViolentOff');
 
+//체크박스를 통한 table 필터링
 function applyFilters() {
         const rows = document.querySelectorAll('tbody tr');
         let anyFilterChecked = false;
